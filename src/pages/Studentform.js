@@ -17,17 +17,19 @@ const Studentform = () => {
     const [Gender, setGender] = useState("")
     function submit(e) {
         e.preventDefault()
+
         const data = {
             id: Date.now(),
             name: Name,
             phone: Phone,
             dob: Dob,
             email: Email,
-            gender: Boolean(Gender),
+            gender:Gender,
             address: Address,
             course: Course,
             fee: Fee
         }
+      //  console.log(data)
         dispatch(add(data))
         setName("")
         setPhone("")
@@ -71,22 +73,20 @@ const Studentform = () => {
                         </div>
                         <div className='mb-3'>
                             <label htmlFor="gender">Gender:</label>
-                            <label htmlFor="male"> Male </label>
-                            <input type='radio' id="male" name='gender' value={Gender} onChange={(e) => setGender(e.target.value)} />
-                            <label htmlFor="female"> Female </label>
-                            <input type='radio' id="female" name='gender' value={Gender} onChange={(e) => setGender(e.target.value)} />
+                            <input type='radio' id="male" name='gender' value="Male" onChange={(e) => setGender(e.target.value)} checked={Gender === 'Male'}  /><label htmlFor="male"> Male </label>
+                            <input type='radio' id="female" name='gender' value="Female"onChange={(e) => setGender(e.target.value)} checked={Gender === 'Female'}  /><label htmlFor="female"> Female </label>
                         </div>
                         <div className="mb-3 ">
                             <label htmlFor=''>Course:</label><select onChange={(e) => setcourse(e.target.value)} value={Course} >
-                                <option>Choose your course</option>
+                                <option value="">Choose your course</option>
                                 {course.map((item) => (
-                                    <option key={item.id}>{item.course}</option>
+                                    <option key={item.id}value={item.id}>{item.course}</option>
                                 ))}
                             </select>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="fee">Fee</label>
-                            <input className="form-control" type="number" id="fee" onChange={(e) => setFee(e.target.value)} value={Fee} placeholder='enter fee' />
+                            <label htmlFor="fee">Advance Payment</label>
+                            <input className="form-control" type="number" id="fee" onChange={(e) => setFee(e.target.value)} value={Fee} placeholder='enter advance payment' />
 
                         </div>
                         <div className="col-6 mb-3 offset-md-3">
